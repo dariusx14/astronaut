@@ -48,11 +48,12 @@ export default function Chat() {
           Send
         </button>
         <button
-          onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
-          className="bg-green-500 text-white p-2 rounded"
-        >
-          {listening ? "Listening..." : "Start Voice"}
-        </button>
+  onClick={() => (listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening())}
+  className="bg-green-500 text-white p-2 rounded"
+>
+  {listening ? "Listening..." : "Start Voice"}
+</button>
+
       </div>
 
       {/* AI Reply */}

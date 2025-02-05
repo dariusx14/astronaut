@@ -1,8 +1,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const AstronautAI = dynamic(() => import("../components/AstronautAI"), { ssr: false });
-const Chat = dynamic(() => import("../components/Chat"), { ssr: false });
+const AstronautAI = dynamic(() => import("../../../../components/AstronautAI"), { ssr: false });
+const Chat = dynamic(() => import("../../../../components/Chat"), { ssr: false });
 
 export default function Home() {
   return (

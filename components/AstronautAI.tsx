@@ -1,27 +1,31 @@
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, Environment, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
+import { Object3D } from 'three';
 
 function AstronautModel() {
-  const { scene } = useGLTF('/astronaut.glb');
-  // @ts-expect-error - primitive is a valid JSX element in R3F
-  return <primitive object={scene} />;
+  const { scene } = useGLTF('/astronaut.glb') as { scene: Object3D };
+
+  return (
+    // @ts-expect-error - Known issue with R3F types
+    <primitive object={scene} />
+  );
 }
 
 export default function App() {
   return (
     <div className="h-screen w-full">
-      <Canvas>
+      <Canvas shadows>
         <Suspense fallback={null}>
-          <AstronautModel />
-          {/* Fixed light syntax */}
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[5, 5, 5]} intensity={1} />
+          <Stage intensity={0.6} environment="city">
+            <AstronautModel />
+          </Stage>
+          <Environment preset="sunset" />
         </Suspense>
       </Canvas>
     </div>
   );
 }
 
-// Cleanup
+// Preload model
 useGLTF.preload('/astronaut.glb');
